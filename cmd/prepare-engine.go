@@ -4,10 +4,10 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/config"
-	"github.com/go-flutter-desktop/hover/internal/enginecache"
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/config"
+	"github.com/danmalafaia/hover/internal/enginecache"
+	"github.com/danmalafaia/hover/internal/log"
 	"github.com/spf13/cobra"
 )
 

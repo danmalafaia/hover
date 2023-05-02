@@ -12,36 +12,37 @@ import (
 	"github.com/otiai10/copy"
 	"github.com/spf13/cobra"
 
-	"github.com/go-flutter-desktop/hover/cmd/packaging"
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/config"
-	"github.com/go-flutter-desktop/hover/internal/darwinhacks"
-	"github.com/go-flutter-desktop/hover/internal/enginecache"
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
-	internalVersion "github.com/go-flutter-desktop/hover/internal/version"
-	"github.com/go-flutter-desktop/hover/internal/versioncheck"
+	"github.com/danmalafaia/hover/cmd/packaging"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/config"
+	"github.com/danmalafaia/hover/internal/darwinhacks"
+	"github.com/danmalafaia/hover/internal/enginecache"
+	"github.com/danmalafaia/hover/internal/fileutils"
+	"github.com/danmalafaia/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/pubspec"
+	internalVersion "github.com/danmalafaia/hover/internal/version"
+	"github.com/danmalafaia/hover/internal/versioncheck"
 )
 
 var dotSlash = string([]byte{'.', filepath.Separator})
 
 var (
 	// common build flags (shared with `hover run`)
-	buildOrRunFlutterTarget   string
-	buildOrRunGoFlutterBranch string
-	buildOrRunCachePath       string
-	buildOrRunOpenGlVersion   string
-	buildOrRunEngineVersion   string
-	buildOrRunHoverFlavor     string
-	buildOrRunDocker          bool
-	buildOrRunDebug           bool
-	buildOrRunJitRelease      bool
-	buildOrRunRelease         bool
-	buildOrRunProfile         bool
-	buildOrRunMode            build.Mode
-	buildOrRunSkipFlutter     bool
-	buildOrRunSkipEmbedder    bool
+	buildOrRunFlutterTarget   	string
+	buildOrRunGoFlutterBranch 	string
+	buildOrRunCachePath       	string
+	buildOrRunOpenGlVersion   	string
+	buildOrRunEngineVersion   	string
+	buildOrRunHoverFlavor     	string
+	buildOrRunDocker          	bool
+	buildOrRunDebug           	bool
+	buildOrRunJitRelease      	bool
+	buildOrRunRelease         	bool
+	buildOrRunProfile         	bool
+	buildOrRunMode            	build.Mode
+	buildOrRunSkipFlutter     	bool
+	buildOrRunSkipEmbedder    	bool
+	buildOrRunNoSoundNullSafety	bool
 )
 
 func initCompileFlags(cmd *cobra.Command) {
@@ -58,6 +59,7 @@ func initCompileFlags(cmd *cobra.Command) {
 	cmd.PersistentFlags().BoolVar(&buildOrRunProfile, "profile", false, "Build a profile version of the app. Currently very experimental")
 	cmd.PersistentFlags().BoolVar(&buildOrRunSkipFlutter, "skip-flutter", false, "Skip the flutter steps")
 	cmd.PersistentFlags().BoolVar(&buildOrRunSkipEmbedder, "skip-embedder", false, "Skip the flutter steps")
+	cmd.PersistentFlags().BoolVar(&buildOrRunNoSoundNullSafety, "no-sound-null-safety", false, "Disable sound null safety")
 
 	cmd.PersistentFlags().MarkHidden("branch")
 }
@@ -243,6 +245,9 @@ func subcommandBuild(targetOS string, packagingTask packaging.Task, vmArguments 
 		}
 		if buildOrRunProfile {
 			buildFlags = append(buildFlags, "--profile")
+		}
+		if buildOrRunNoSoundNullSafety {
+			buildFlags = append(buildFlags, "--no-sound-null-safety")
 		}
 		dockerHoverBuild(targetOS, packagingTask, buildFlags, nil)
 		removeBrokenBundleFilesForDocker()
@@ -454,8 +459,14 @@ func buildFlutterBundle(targetOS string) {
 		trackWidgetCreation = "--track-widget-creation"
 	}
 
-	cmdFlutterBuild := exec.Command(build.FlutterBin(), "build", "bundle",
-		"--asset-dir", filepath.Join(build.OutputDirectoryPath(targetOS, buildOrRunMode), "flutter_assets"),
+	var soundNullSafety string
+	if buildOrRunNoSoundNullSafety != false {
+		soundNullSafety = "--no-sound-null-safety"
+	}
+
+	cmdFlutterBuild := exec.Command(build.FlutterBin(), "build", "appbundle",
+		soundNullSafety,
+		// "--asset-dir", filepath.Join(build.OutputDirectoryPath(targetOS, buildOrRunMode), "flutter_assets"),
 		"--target", buildOrRunFlutterTarget,
 		trackWidgetCreation,
 	)
@@ -463,8 +474,11 @@ func buildFlutterBundle(targetOS string) {
 	cmdFlutterBuild.Stdout = os.Stdout
 
 	log.Infof("Bundling flutter app")
+
+	log.Infof("Running command: ", cmdFlutterBuild.String())
 	err = cmdFlutterBuild.Run()
 	if err != nil {
+
 		log.Errorf("Flutter build failed: %v", err)
 		os.Exit(1)
 	}
@@ -778,10 +792,10 @@ func buildCommand(targetOS string, vmArguments []string, outputBinaryPath string
 	ldflags = append(ldflags, fmt.Sprintf("-X main.vmArguments=%s", strings.Join(vmArguments, ";")))
 	// overwrite go-flutter build-constants values
 	ldflags = append(ldflags, fmt.Sprintf(
-		"-X 'github.com/go-flutter-desktop/go-flutter.ProjectVersion=%s' "+
-			" -X 'github.com/go-flutter-desktop/go-flutter.PlatformVersion=%s' "+
-			" -X 'github.com/go-flutter-desktop/go-flutter.ProjectName=%s' "+
-			" -X 'github.com/go-flutter-desktop/go-flutter.ProjectOrganizationName=%s'",
+		"-X 'github.com/danmalafaia/go-flutter.ProjectVersion=%s' "+
+			" -X 'github.com/danmalafaia/go-flutter.PlatformVersion=%s' "+
+			" -X 'github.com/danmalafaia/go-flutter.ProjectName=%s' "+
+			" -X 'github.com/danmalafaia/go-flutter.ProjectOrganizationName=%s'",
 		buildVersionNumber,
 		currentTag,
 		config.GetConfig().GetApplicationName(pubspec.GetPubSpec().Name),

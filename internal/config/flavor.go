@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/log"
 )
 
 var hoverYaml string

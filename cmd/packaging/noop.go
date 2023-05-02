@@ -1,6 +1,6 @@
 package packaging
 
-import "github.com/go-flutter-desktop/hover/internal/build"
+import "github.com/danmalafaia/hover/internal/build"
 
 type noopTask struct{}
 

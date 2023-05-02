@@ -7,10 +7,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/fileutils"
+	"github.com/danmalafaia/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/pubspec"
 )
 
 func init() {

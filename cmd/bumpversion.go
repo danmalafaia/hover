@@ -8,10 +8,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/enginecache"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/versioncheck"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/enginecache"
+	"github.com/danmalafaia/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/versioncheck"
 )
 
 func init() {
@@ -51,7 +51,7 @@ func upgradeGoFlutter(targetOS string) (err error) {
 		buildOrRunGoFlutterBranch = "@latest"
 	}
 
-	cmdGoGetU := exec.Command(build.GoBin(), "get", "-u", "-d", "github.com/go-flutter-desktop/go-flutter"+buildOrRunGoFlutterBranch)
+	cmdGoGetU := exec.Command(build.GoBin(), "get", "-u", "-d", "github.com/danmalafaia/go-flutter"+buildOrRunGoFlutterBranch)
 	cmdGoGetU.Env = append(os.Environ(),
 		"GO111MODULE=on",
 	)

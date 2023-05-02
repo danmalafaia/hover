@@ -11,7 +11,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/log"
 )
 
 // IsFileExists checks if a file exists and is not a directory

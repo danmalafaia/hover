@@ -8,8 +8,8 @@ import (
 	"runtime/debug"
 	"sync"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/log"
 )
 
 // FlutterRequiredEngineVersion returns the commit hash of the engine in use

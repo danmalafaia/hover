@@ -10,9 +10,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/pubspec"
 	"github.com/spf13/cobra"
 )
 
@@ -61,7 +61,7 @@ var publishPluginCmd = &cobra.Command{
 			fmt.Printf(`package main
 
 import (
-	flutter "github.com/go-flutter-desktop/go-flutter"
+	flutter "github.com/danmalafaia/go-flutter"
 	%s "github.com/my-organization/%s/go"
 )
 

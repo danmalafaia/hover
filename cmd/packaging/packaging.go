@@ -3,7 +3,7 @@ package packaging
 import (
 	"bytes"
 	"fmt"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
+	"github.com/danmalafaia/hover/internal/pubspec"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -14,10 +14,10 @@ import (
 
 	"github.com/otiai10/copy"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/config"
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/config"
+	"github.com/danmalafaia/hover/internal/fileutils"
+	"github.com/danmalafaia/hover/internal/log"
 )
 
 var packagingPath = filepath.Join(build.BuildPath, "packaging")
@@ -233,7 +233,7 @@ func (t *packagingTask) pack(templateData map[string]string, packageName, projec
 	if err != nil {
 		log.Errorf("%v", err)
 		log.Warnf("Packaging is very experimental and has mostly been tested on Linux.")
-		log.Infof("Please open an issue at https://github.com/go-flutter-desktop/go-flutter/issues/new?template=BUG.md")
+		log.Infof("Please open an issue at https://github.com/danmalafaia/go-flutter/issues/new?template=BUG.md")
 		log.Infof("with the log and a reproducible example if possible. You may also zip your app code")
 		log.Infof("if you are comfortable with it (closed source etc.) and attach it to the issue.")
 		os.Exit(1)

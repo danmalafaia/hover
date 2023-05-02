@@ -18,14 +18,14 @@ import (
 	"golang.org/x/mod/modfile"
 	"gopkg.in/yaml.v2"
 
-	"github.com/go-flutter-desktop/hover/internal/build"
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/modx"
-	"github.com/go-flutter-desktop/hover/internal/pubspec"
+	"github.com/danmalafaia/hover/internal/build"
+	"github.com/danmalafaia/hover/internal/fileutils"
+	"github.com/danmalafaia/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/modx"
+	"github.com/danmalafaia/hover/internal/pubspec"
 )
 
-const standaloneImplementationListAPI = "https://raw.githubusercontent.com/go-flutter-desktop/plugins/master/list.json"
+const standaloneImplementationListAPI = "https://raw.githubusercontent.com/danmalafaia/plugins/master/list.json"
 
 var (
 	listAllPluginDependencies bool
@@ -496,7 +496,7 @@ func listPlatformPlugin() ([]PubDep, error) {
 				}
 			}
 		} else {
-			// check if the plugin is available in github.com/go-flutter-desktop/plugins
+			// check if the plugin is available in github.com/danmalafaia/plugins
 			for _, plugin := range onlineList {
 				if entry.name == plugin.Name {
 					entry.desktop = true

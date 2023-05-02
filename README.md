@@ -4,7 +4,7 @@ Hover is a simple build tool to create [Flutter](https://flutter.dev) desktop ap
 
 **Hover is brand new and under development, it should be considered alpha. Anything can break, please backup your data before using hover**
 
-Hover is part of the [go-flutter](https://github.com/go-flutter-desktop/go-flutter) project. Please report issues at the [go-flutter issue tracker](https://github.com/go-flutter-desktop/go-flutter/issues/).
+Hover is part of the [go-flutter](https://github.com/danmalafaia/go-flutter) project. Please report issues at the [go-flutter issue tracker](https://github.com/danmalafaia/go-flutter/issues/).
 
 ## Install
 
@@ -15,16 +15,16 @@ Run `go version` and make sure that your Go version is 1.13 or higher.
 Then install hover by running this in your home directory:
 
 ```bash
-GO111MODULE=on go get -u -a github.com/go-flutter-desktop/hover@latest
+GO111MODULE=on go get -u -a github.com/danmalafaia/hover@latest
 ```
 Or windows:
 ```
 set GO111MODULE=on
-go install github.com/go-flutter-desktop/hover@latest
+go install github.com/danmalafaia/hover@latest
 ```
 Or for powershell:
 ```powershell
-$env:GO111MODULE="on"; go get -u -a github.com/go-flutter-desktop/hover@latest
+$env:GO111MODULE="on"; go get -u -a github.com/danmalafaia/hover@latest
 ```
 Make sure the hover binary is on your `PATH` (defaults are `$GOPATH/bin` or `$HOME/go/bin`)
 
@@ -61,7 +61,7 @@ hover init github.com/my-organization/simpleApplication
 
 This creates the directory `go` and adds boilerplate files such as Go code and a default logo.
 
-Optionally, you may add [plugins](https://github.com/go-flutter-desktop/plugins) to `go/cmd/options.go`  
+Optionally, you may add [plugins](https://github.com/danmalafaia/plugins) to `go/cmd/options.go`  
 Optionally, change the logo in `go/assets/logo.png`, which is used as icon for the window.
 
 ### Run with hot-reload
@@ -82,7 +82,7 @@ By default, hover uses the file `lib/main_desktop.dart` as entrypoint. You may s
 
 Please try the [experimental Hover extension for VSCode](https://marketplace.visualstudio.com/items?itemName=go-flutter.hover).
 
-If you want to manually integrate with VSCode, read this [issue](https://github.com/go-flutter-desktop/go-flutter/issues/129#issuecomment-513590141).
+If you want to manually integrate with VSCode, read this [issue](https://github.com/danmalafaia/go-flutter/issues/129#issuecomment-513590141).
 
 ##### Emacs
 
@@ -148,4 +148,4 @@ hover run --flavor develop || hover build --flavor develop
 
 ## Issues
 
-Please report issues at the [go-flutter issue tracker](https://github.com/go-flutter-desktop/go-flutter/issues/).
+Please report issues at the [go-flutter issue tracker](https://github.com/danmalafaia/go-flutter/issues/).

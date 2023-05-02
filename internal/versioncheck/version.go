@@ -14,9 +14,9 @@ import (
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
 
-	"github.com/go-flutter-desktop/hover/internal/fileutils"
-	"github.com/go-flutter-desktop/hover/internal/log"
-	"github.com/go-flutter-desktop/hover/internal/modx"
+	"github.com/danmalafaia/hover/internal/fileutils"
+	"github.com/danmalafaia/hover/internal/log"
+	"github.com/danmalafaia/hover/internal/modx"
 )
 
 func hasUpdate(timestampDir, currentVersion, repo string) (bool, string) {
@@ -110,7 +110,7 @@ func CheckForHoverUpdate(currentVersion string) {
 		update, newVersion := hasUpdate(filepath.Join(cacheDir, "hover"), currentVersion, "hover")
 		if update {
 			log.Infof("'hover' has an update available. (%s -> %s)", currentVersion, newVersion)
-			log.Infof("              To update 'hover' go to `https://github.com/go-flutter-desktop/hover#install` and follow the install steps")
+			log.Infof("              To update 'hover' go to `https://github.com/danmalafaia/hover#install` and follow the install steps")
 		}
 	}
 }
@@ -131,7 +131,7 @@ func CheckForGoFlutterUpdate(goDirectoryPath string, currentTag string) {
 
 // CurrentGoFlutterTag retrieve the semver of go-flutter in 'go.mod'
 func CurrentGoFlutterTag(goDirectoryPath string) (currentTag string, err error) {
-	const expected = "github.com/go-flutter-desktop/go-flutter"
+	const expected = "github.com/danmalafaia/go-flutter"
 	var m *modfile.File
 
 	if m, err = modx.Open(goDirectoryPath); err != nil {
